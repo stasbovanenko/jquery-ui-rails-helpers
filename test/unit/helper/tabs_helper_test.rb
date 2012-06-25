@@ -15,6 +15,7 @@ class TabsHelperTest < ActionView::TestCase
 			@tabs = tabs_for do |tab|
 				tab.create('tab_one', 'One') { "Tab One." }
 				tab.create('tab_two', 'Two') { "Tab Two." }
+        tab.new("Tab three") {"<h1>Tab three</h1>"}
 			end
 		end
 
@@ -22,9 +23,10 @@ class TabsHelperTest < ActionView::TestCase
 			render :text => @tabs
 			assert_select "div[id='tabs']", 1
 			assert_select "div[id='tabs'] ul", 1
-			assert_select "div[id='tabs'] ul li", 2
+			assert_select "div[id='tabs'] ul li", 3
 			assert_select "div[id='tabs'] div[id='tab_one']", 1
 			assert_select "div[id='tabs'] div[id='tab_two']", 1
+			assert_select "div[id='tabs'] div[id='tab_three']", 1
 		end
 	end
 
