@@ -19,6 +19,10 @@ module TabsHelper
 			yield self
 		end
 
+    def new (tab_text, options={}, &block)
+        @tabs << [tab_text.downcase.sub(/\s/,'_') , tab_text, options, block, {:ajax => false} ]
+    end
+
 		def create( tab_id, tab_text, options={}, &block )
 			raise "Block needed for TabsRenderer#CREATE" unless block_given?
 			@tabs << [ tab_id, tab_text, options, block, {:ajax => false} ]
